@@ -1,0 +1,50 @@
+body {
+    /* set margin to 0 and overflow to hidden, to go fullscreen */
+    margin: 0;
+    overflow: hidden;
+}
+.dg.ac{
+    display:none !important;
+}
+input[type="number"]{
+    width:80px;
+}
+input[type="checkbox"]{
+    width:80px;
+}
+input[type="button"]{
+    width:auto;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    border: none;
+}
+p{
+    margin-left:30px;
+    margin-top:30px;
+}
+#Save,#Load{
+    margin-top:30px;
+}
+.buttonRow{
+    padding-right:30px;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height:0%;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    cursor: inherit;
+    display: block;
+}
+.checkbox{
+    margin-top:0;
+}
+.no-padding{
+    padding:0;
+}
+#successSave .modal-dialog{
+    width:300px;
+}

@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+
+    <title>鞋款定制系统测试版</title>
+    <script type="text/javascript" src="./js/three.js"></script>
+    <script type="text/javascript" src="js/jscolor.js"></script>
+
+    <script type="text/javascript" src="./js/dat.gui.js"></script>
+    <script type="text/javascript" src="./js/OrbitControls.js"></script>
+    <script type="text/javascript" src="./js/waiting.js"></script>
+
+
+    <style>
+        body {
+            overflow: auto;
+        }
+		#WebGL-output{
+			/*width:80%;*/
+		}
+		 img{
+			width:70px;
+		}
+        img.active{
+            border:1px solid #ff0000;
+        }
+        canvas {
+            border : 1px solid #ffbbbb;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-8">
+    <div class="row text-center"><img src="./image/produst-title.png" style="width:600px;"/></div>
+    <div id="WebGL-output" class="row">
+    </div>
+</div>
+<div class="col-md-4" style="height:100vh;overflow:auto;">
+    <!-- Div which will hold the Output -->
+
+    <div class="row" style="margin-top:100px;">
+        <div class="col-md-2 text-right"><label>鞋头装饰</label></div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li>
+                    <img class="imgA" src="./image/KZ2.jpg" value="ribbon1.json" onclick="updateRibbon(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/KZ4.jpg" value="ribbon2.json" onclick="updateRibbon(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/KZ3.jpg" value="ribbon3.json" onclick="updateRibbon(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/blank.jpg" value="" onclick="updateRibbon(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-2 text-right"><label>后身款式</label></div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li>
+                    <img class="imgA active" src="./image/B7.png" value="shoeUp.json" onclick="updateUp(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/NK1.png" value="shoeUp2.json" onclick="updateUp(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/HK1.png" value="shoeUp3.json" onclick="updateUp(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B1.png" value="shoeUp4.json" onclick="updateUp(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-2 text-right"><label>鞋跟款式</label></div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li>
+                    <img class="imgA" src="./image/JG.png" value="shoeDown1.json" onclick="updateDown(this)">
+                </li>
+                <li>
+                    <img class="imgA active" src="./image/CG.png" value="shoeDown.json" onclick="updateDown(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/DG.png" value="shoeDown2.json" onclick="updateDown(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/ZG.png" value="shoeDown3.json" onclick="updateDown(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" style="margin-top:15px;">
+        <span id="pannel" >
+             <input type="text" id="color" class="jscolor{position:'left'}" style="visibility: hidden"/>
+            <lable>皮面反射率(0~100)&nbsp;&nbsp;</lable><input type="number" class="form-control" id="shinny" value="8" step="2" min="0" max="100"/>
+        </span>
+    </div>
+
+    <div class="row" style="margin-top:15px;">
+        <div class="col-md-2 text-right"><lable>镜面高光漆皮</lable></div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li>
+                    <img class="imgA" src="./image/red.jpg" onclick="updateColor(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_QP02.jpg" onclick="updateColor(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_QP011.jpg" onclick="updateColor(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right"><label>进口胎牛皮</label></div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li>
+                    <img class="imgA" src="./image/B_YW02.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_YW01.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_YW06.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_YW07.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_YW08.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right"><label>高斯绒面皮</label></div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li>
+                    <img class="imgA" src="./image/B_FR14.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_FR04.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_FR03.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_FR02.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li>
+                    <img class="imgA" src="./image/B_FR01.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right">婚礼鞋专用面料</div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li class="material-list ">
+                    <img class="imgA" src="./image/B_HL7.jpg" onclick="UpdateMaterial(this)">
+                </li>
+                <li class="material-list ">
+                    <img class="imgA" src="./image/S_HL1.jpg" onclick="UpdateMaterial(this)">
+                </li>
+                <li class="material-list ">
+                    <img class="imgA" src="./image/B_HL8.jpg" onclick="UpdateMaterial(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right">手工压花皮</div>
+        <div class="col-md-10">
+            <ul class="list-inline inline" >
+                <li class="material-list ">
+                    <img class="imgA" src="./image/B_HP028.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li class="material-list ">
+                    <img class="imgA" src="./image/B_HP016.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+                <li class="material-list ">
+                    <img class="imgA" src="./image/B_HP015.jpg" onclick="UpdateMaterial2(this)">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- Javascript code that runs our Three.js examples -->
+<script type="text/javascript">
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0xffffff );
+
+        var targetList = [];
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render and set the size
+        var webGLRenderer = new THREE.WebGLRenderer();
+        webGLRenderer.setClearColor(new THREE.Color(0x000, 1.0));
+        webGLRenderer.setSize(window.innerWidth*0.65, window.innerHeight*0.65);
+        webGLRenderer.shadowMapEnabled = true;
+
+    // once everything is loaded, we run our Three.js stuff.
+    function init() {
+        // position and point the camera to the center of the scene
+        camera.position.x = -200;
+        camera.position.y = 300;
+        camera.position.z = 400;
+        camera.lookAt(new THREE.Vector3(00, 0, 0));
+        var orbitControls = new THREE.OrbitControls(camera,webGLRenderer.domElement);
+        orbitControls.maxDistance =600;
+        orbitControls.minDistance =200;
+//        orbitControls.maxPolarAngle = 180;
+        orbitControls.autoRotate = true;
+        var clock = new THREE.Clock();
+        // add the output of the renderer to the html element
+        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
+        // call the render function
+        var step = 0;
+
+	var light = new THREE.PointLight(0xffffff,1,750);
+	light.position.set(0,650,0);
+	scene.add(light);
+	var light1 = new THREE.PointLight(0xffffff,1,700);
+	light1.position.set(-670,1,1);
+	scene.add(light1);
+	var light2 = new THREE.PointLight(0xffffff,1,700);
+	light2.position.set(1,-50,-650);
+	scene.add(light2);
+	var light3 = new THREE.PointLight(0xffffff,1,700);
+	light3.position.set(1,-50,650);
+	scene.add(light3);
+
+
+        var ambiLight = new THREE.AmbientLight(0xffffff);
+    scene.add(ambiLight);
+
+        var axisHelper = new THREE.AxisHelper( 5000 );
+//        scene.add( axisHelper );
+
+		myFunc();
+        render();
+        function render() {
+            var delta = clock.getDelta();
+            orbitControls.update(delta);
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+            webGLRenderer.render(scene, camera);
+        }
+      
+    }
+    window.onload = init;
+</script>
+<script src="./js/drawShoe.js"></script>
+</body>
+</html>
